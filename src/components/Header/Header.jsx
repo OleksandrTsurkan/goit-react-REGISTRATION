@@ -25,9 +25,9 @@ const Header = ({ toggleModal }) => {
 				<NavLink className=' mb-0 mx-3 h3 text-white' to='todos'>
 					Todos
 				</NavLink>
-				<Link className=' mb-0 mx-3 h3 text-white' to='users'>
+				<isAuth Link className=' mb-0 mx-3 h3 text-white' to='users'>
 					Users
-				</Link>
+				</isAuth>
 				<Link className=' mb-0 mx-3 h3 text-white' to='products'>
 					Products
 				</Link>
