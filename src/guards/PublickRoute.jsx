@@ -1,11 +1,12 @@
-
 import { useSelector } from 'react-redux';
-import { Navigate } from 'react-router-dom';
+import { Navigate, useLocation } from 'react-router-dom';
 import { authSelector } from 'store/auth/selector';
 
 const PublickRoute = ({ children }) => {
   const isAuth = useSelector(authSelector);
-  return !isAuth? children : <Navigate to='/login'/>
+  const location = useLocation();
+  console.log('first', location);
+  return !isAuth ? children : <Navigate to={location.state ?? '/'} />;
 };
 
 export default PublickRoute;

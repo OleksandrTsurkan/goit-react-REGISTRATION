@@ -9,22 +9,27 @@ import UsersPage from './pages/UsersPage';
 import Loader from './components/Loader';
 import PrivateRoute from 'guards/PrivateRoute';
 import PublickRoute from 'guards/PublickRoute';
+import { Toaster } from 'react-hot-toast';
+
 
 const ProductsPageDetails = lazy(() =>
   import('./pages/ProductsPage/ProductsPageDetails')
 );
+ 
+const ProfilePage = lazy(() => import('./pages/ProfilePage/Index'));
 const Login = lazy(() => import('./pages/Login'));
 const Registration = lazy(() => import('./pages/Registration/index'));
 
-const App = () => {
+const App = () => { 
   return (
     <>
       <Loader />
-
+      <Toaster />
       <Suspense fallback={'Loading.....'}>
         <Routes>
           <Route path="/" element={<Layout />}>
             <Route index element={<HomePage />} />
+            <Route path="profile" element={<ProfilePage />} />
             <Route path="todos" element={<TodoPage />} />
             <Route
               path="users"
@@ -45,9 +50,9 @@ const App = () => {
           <Route
             path="/login"
             element={
-              <PublickRoute>
-                <Login />
-              </PublickRoute>
+              // <PublickRoute>
+              <Login />
+              /* </PublickRoute> */
             }
           />
           <Route

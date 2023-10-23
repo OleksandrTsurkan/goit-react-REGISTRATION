@@ -1,24 +1,29 @@
-// import { useNavigate } from 'react-router-dom'
-import FormLogin from '../../components/Forms/FormLogin'
-import { useDispatch } from 'react-redux'
-import { loginThunk } from '../../store/auth/thunks'
-// import { authSelector } from '../../store/auth/selector'
-// import { useEffect } from 'react'
+import FormLogin from '../../components/Forms/FormLogin';
+import { useDispatch } from 'react-redux';
+import { loginThunk } from '../../store/auth/thunks';
+import toast from 'react-hot-toast';
 
 const Login = () => {
-	// const isAuth = useSelector(authSelector)
-	const dispatch = useDispatch()
-	// const navigate = useNavigate()
+  const dispatch = useDispatch();
+  //   const isAuth = useSelector(authSelector);
+  //   const navigate = useNavigate();
+  //   useEffect(() => {
+  //     if (isAuth) {
+  //       toast.success('welcome', { duration: 3300, position: 'top-right' });
+  //       navigate('/');
+  //     }
+  //   }, [isAuth, navigate]);
 
-	const login = (body) => {
-		dispatch(loginThunk(body))
-	}
+  const login = async body => {
+    try {
+      await dispatch(loginThunk(body)).unwrap();
+      toast.success('welcome', { duration: 3300, position: 'top-right' });
+    } catch (error) {
+      toast.error('Error', { duration: 3300, position: 'top-right' });
+    }
+  };
 
-	// useEffect(() => {
-	// 	isAuth && navigate('/')
-	// }, [isAuth, navigate])
+  return <FormLogin login={login} />;
+};
 
-	return <FormLogin login={login} />
-}
-
-export default Login
+export default Login;

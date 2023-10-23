@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
-import { loginThunk, refreshThunk, registrationThunk } from './thunks'
+import { loginThunk, refreshThunk, registrationThunk, updateProfileThunk } from './thunks'
 
 const initialState = {
 	token: '',
@@ -10,6 +10,10 @@ const handleAuthFulfilled = (state, { payload }) => {
 	state.token = payload.token
 	state.profile = payload.user
 }
+
+const handleUpdateProfile = (state, { payload }) => {
+  state.profile = payload
+};
 
 const authSlice = createSlice({
 	name: 'auth',
@@ -22,9 +26,10 @@ const authSlice = createSlice({
 	},
 	extraReducers: (builder) => {
 		builder
-			.addCase(registrationThunk.fulfilled, handleAuthFulfilled)
-			.addCase(loginThunk.fulfilled, handleAuthFulfilled)
-			.addCase(refreshThunk.fulfilled, handleAuthFulfilled)
+      .addCase(registrationThunk.fulfilled, handleAuthFulfilled)
+      .addCase(loginThunk.fulfilled, handleAuthFulfilled)
+      .addCase(refreshThunk.fulfilled, handleAuthFulfilled)
+      .addCase(updateProfileThunk.fulfilled, handleUpdateProfile);
 	},
 })
 
